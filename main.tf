@@ -19,3 +19,11 @@ module "rds" {
   vpc_cidr        = "10.0.0.0/16" #Hard code this not in output
 
 }
+
+module "ec2" {
+  source    = "./ec2"
+  subnet_id = module.vpc.public_subnet1_id #passing public subnet 1 id from vpc module
+  vpc_id    = module.vpc.vpc_id
+  tags      = local.project_tags
+
+}
